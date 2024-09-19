@@ -9,7 +9,7 @@ class Close(unittest.TestCase):
     def setUp(self):
         self.ticker = 'AAPL'
         self.period = '1mo'
-        self.threshold = 5
+        self.threshold = 10
 
         # Получение исторических данных об акциях для указанного тикера и временного периода
 
