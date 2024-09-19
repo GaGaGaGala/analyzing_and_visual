@@ -14,20 +14,21 @@ class Close(unittest.TestCase):
         # Получение исторических данных об акциях для указанного тикера и временного периода
 
     def test_return_dataframe(self):
-        stock_data = fetch_stock_data(self.ticker, self.period)
-        self.assertIsInstance(stock_data, pd.DataFrame)
+        data = fetch_stock_data(self.ticker, self.period)
+        self.assertIsInstance(data, pd.DataFrame)
 
         # Добавление в DataFrame колонки со скользящим средним, рассчитанным на основе цен закрытия
 
     def test_add_moving_average(self):
-        stock_data = fetch_stock_data(self.ticker, self.period)
-        stock_data = add_moving_average(stock_data)
-        self.assertTrue('Moving_Average' in stock_data.columns)
+        data = fetch_stock_data(self.ticker, self.period)
+        data = add_moving_average(data)
+        self.assertTrue('Moving_Average' in data.columns)
 
         # Проверка на вывод данных в консоль
 
     def test_output_to_console(self):
-        stock_data = fetch_stock_data(self.ticker, self.period)
+        data = fetch_stock_data(self.ticker, self.period)
+        self.assertTrue(data)
 
 if __name__ == '__main__':
     unittest.main()
