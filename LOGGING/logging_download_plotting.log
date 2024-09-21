@@ -1,2 +1,3 @@
 INFO:root:Объект "Ticker" yfinance.Ticker object <AAPL>
 INFO:root:В DataFrame добавлено свойство "Moving_Average" <class 'pandas.core.frame.DataFrame'>
+INFO:root:Выводится среднее значение колонки "Close": 223.8590913252397

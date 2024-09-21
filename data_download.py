@@ -1,8 +1,10 @@
 import yfinance as yf
 import logging
+import csv
+import pandas as pd
 
 logging.basicConfig(level=logging.INFO,
-                    handlers=[logging.FileHandler('LOGGING/logging_download_plotting.log', 'w','utf-8')]
+                    handlers=[logging.FileHandler('LOGGING/logging_download_plotting.log', 'w', 'utf-8')]
                     )
 
 
@@ -21,12 +23,15 @@ def add_moving_average(data, window_size=5):
     logging.info(f'В DataFrame добавлено свойство "Moving_Average" {type(data)}')
     return data
 
+
 def calculate_and_display_average_price(data):
     """Вычисляет и выводит среднюю цену закрытия акций за заданный период."""
     average_price = data['Close'].mean(axis=0)
     logging.info(f'Выводится среднее значение колонки "Close": {average_price}')
     print(f'Среднее значение колонки "Close": {average_price}\n')
     return data
+
+
 def notify_if_strong_fluctuations(data, threshold):
     """Анализирует данные и уведомляет пользователя, если цена акций колебалась более чем на заданный процент за период.
     """
@@ -43,4 +48,19 @@ def notify_if_strong_fluctuations(data, threshold):
     if dif_percent_price > threshold:
         logging.info(f'Значение колебаний: {dif_percent_price}')
         print(f'Превышен порог цен -{dif_percent_price}, допустимое значение -{threshold}')
+
+
+def export_data_to_csv(data, filename):
+    """Принимает DataFrame и имя файла и сохраняет данные об акциях в указанный файл. """
+    csv_filename = "dataframe.csv'"
+    csv_data = [
+        ['Ticker', 'period', 'average_price', 'threshold', 'dif_percent_price']
+    ]
+    with open(csv_filename, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerows(csv_data)
+    # df = pd.DataFrame(data)
+    # df.to_csv('dataframe.csv', index=False)
+    logging.info(f'Объект {type(data)} экспортирован в файл')
+
 
