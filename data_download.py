@@ -53,14 +53,6 @@ def notify_if_strong_fluctuations(data, threshold):
 def export_data_to_csv(data, filename):
     """Принимает DataFrame и имя файла и сохраняет данные об акциях в указанный файл. """
     csv_filename = "dataframe.csv'"
-    csv_data = [
-        ['Ticker', 'period', 'average_price', 'threshold', 'dif_percent_price']
-    ]
-    with open(csv_filename, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        writer.writerows(csv_data)
-    # df = pd.DataFrame(data)
-    # df.to_csv('dataframe.csv', index=False)
+    df = pd.DataFrame(data)
+    df.to_csv('dataframe.csv', index=False)
     logging.info(f'Объект {type(data)} экспортирован в файл')
-
-

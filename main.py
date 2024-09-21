@@ -1,6 +1,7 @@
 import data_download as dd
 import data_plotting as dplt
 import pandas as pd
+import csv
 
 def main():
     """ Основная функция, управляющая процессом загрузки, обработки данных и их визуализации. Запрашивает
@@ -29,10 +30,8 @@ def main():
     threshold = input("Уведомление о сильных колебаниях. Введите порог колебания цен в процентах: ")
     dd.notify_if_strong_fluctuations(stock_data, threshold)
 
-    # def export_data_to_csv(data, filename):
-    #     """Принимает DataFrame и имя файла и сохраняет данные об акциях в указанный файл. """
-    #     df = pd.DataFrame(stock_data)
-    #     df.to_csv('dataframe.csv', index=False)
+    #Принимает DataFrame и имя файла и сохраняет данные об акциях в указанный файл.
+    dd.export_data_to_csv(stock_data, "dataframe.csv'")
 
 if __name__ == "__main__":
     main()
