@@ -33,5 +33,13 @@ def main():
     #Принимает DataFrame и имя файла и сохраняет данные об акциях в указанный файл.
     dd.export_data_to_csv(stock_data, "dataframe.csv'")
 
+    #  Добавление дополнительных технических индикаторов
+    data_rsi = dd.calculate_rsi_from_yfinance(ticker, period)
+    data_macd = dd.calculate_macd_from_yfinance(ticker, period)
+
+    # Визуализация технических индикаторов
+    dplt.plot_technical_indicators(data_rsi, ticker, 'RSI')
+    dplt.plot_technical_indicators(data_macd, ticker, 'MACD')
+
 if __name__ == "__main__":
     main()

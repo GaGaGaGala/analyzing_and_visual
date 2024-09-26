@@ -1,6 +1,5 @@
 import yfinance as yf
 import logging
-import csv
 import pandas as pd
 
 logging.basicConfig(level=logging.INFO,
@@ -56,3 +55,31 @@ def export_data_to_csv(data, filename):
     df = pd.DataFrame(data)
     df.to_csv('dataframe.csv', index=False)
     logging.info(f'Объект {type(data)} экспортирован в файл')
+
+def calculate_rsi_from_yfinance(ticker, period, window=14):
+    data = None
+    # Расчёт RSI
+    delta = data['Close'].diff()
+    height = (delta.where(delta > 0, 0)).rolling(window=window).mean()
+    decline = (-delta.where(delta < 0, 0)).rolling(window=window).mean()
+    rs = height / decline
+    rsi = 100 - (100 / (1 + rs))
+    data['RSI'] = rsi
+    logging.info(f'Колонка "RSI": {type(data)}')
+    return data
+
+
+# Рсчёт технического индикатора MACD
+def calculate_macd_from_yfinance(ticker, period, short_window=12, long_window=26, signal_window=9):
+    data = None
+    # Расчёт MACD
+    short_ema = data['Close'].ewm(span=short_window, adjust=False).mean()
+    long_ema = data['Close'].ewm(span=long_window, adjust=False).mean()
+
+    macd = short_ema - long_ema
+    signal_line = macd.ewm(span=signal_window, adjust=False).mean()
+
+    data['MACD'] = macd
+    data['Signal Line'] = signal_line
+    logging.info(f'Колонка "MACD" и "Signal Line": {type(data)} {type(data)}')
+    return data
