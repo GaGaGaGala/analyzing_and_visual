@@ -14,11 +14,14 @@ def main():
 
     ticker = input("Введите тикер акции (например, «AAPL» для Apple Inc):»")
     period = input("Введите период для данных (например, '1mo' для одного месяца): ")
+    start = input("Введите дату начала анализа")
+    end = input("Введите дату окончания для анализа данных")
 
     # Fetch stock data
+    #data = stock.history(start=start, end=end)
     stock_data = dd.fetch_stock_data(ticker, period)
 
-    # Add moving average to the data
+    # Add moving average to the dataG
     stock_data = dd.add_moving_average(stock_data)
 
     # Plot the data

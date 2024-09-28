@@ -60,7 +60,7 @@ def plot_technical_indicators(data, ticker, indicator, filename= None):
     plt.legend()
 
     if filename is None:
-        filename = f"CHARTS/{ticker}_{indicator}_chart.png"
+        filename = f"{ticker}_{indicator}_stock_price_chart.png"
 
     plt.savefig(filename)
     print(f"{indicator} график сохранён, как {filename}")

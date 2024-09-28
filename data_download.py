@@ -12,8 +12,16 @@ def fetch_stock_data(ticker, period='1mo'):
      Возвращает DataFrame с данными."""
     stock = yf.Ticker(ticker)
     logging.info(f'Объект "Ticker" {stock}')
-    data = stock.history(period=period)
-    return data
+    if len(period) > 3:
+        list_with_space = period.split(',')
+        start, end = [elem.strip() for elem in list_with_space]
+        data = stock.history(start=start, end=end)
+        logging.info(f'Временной период с заданным интервалом {type(data)}')
+        return data
+    else:
+        data = stock.history(period=period)
+        logging.info(f'Временной период с предопределённым интервалом {type(data)}')
+        return data
 
 
 def add_moving_average(data, window_size=5):
@@ -58,6 +66,14 @@ def export_data_to_csv(data, filename):
 
 def calculate_rsi_from_yfinance(ticker, period, window=14):
     data = None
+    if len(period) > 3:
+        list_with_space = period.split(',')
+        start, end = [elem.strip() for elem in list_with_space]
+        data = yf.Ticker(ticker).history(start=start, end=end)
+        logging.info(f'Временной период с заданным интервалом (RSI) {type(data)}')
+    else:
+        data = yf.Ticker(ticker).history(period=period)
+        logging.info(f'Временной период с предопределённым интервалом (RSI) {type(data)}')
     # Расчёт RSI
     delta = data['Close'].diff()
     height = (delta.where(delta > 0, 0)).rolling(window=window).mean()
@@ -72,6 +88,14 @@ def calculate_rsi_from_yfinance(ticker, period, window=14):
 # Рсчёт технического индикатора MACD
 def calculate_macd_from_yfinance(ticker, period, short_window=12, long_window=26, signal_window=9):
     data = None
+    if len(period) > 3:
+        list_with_space = period.split(',')
+        start, end = [elem.strip() for elem in list_with_space]
+        data = yf.Ticker(ticker).history(start=start, end=end)
+        logging.info(f'Временной период с заданным интервалом (MACD) {type(data)}')
+    else:
+        data = yf.Ticker(ticker).history(period=period)
+        logging.info(f'Временной период с предопределённым интервалом (MACD) {type(data)}')
     # Расчёт MACD
     short_ema = data['Close'].ewm(span=short_window, adjust=False).mean()
     long_ema = data['Close'].ewm(span=long_window, adjust=False).mean()

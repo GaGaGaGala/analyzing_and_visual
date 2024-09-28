@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0dcfd7f0-a8ff-481d-b045-5d5aa6d7a9a6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AAPL_3mo_stock_price_chart.png" beforeDir="false" afterPath="$PROJECT_DIR$/AAPL_3mo_stock_price_chart.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AAPL_6mo_stock_price_chart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GOOGL_3mo_stock_price_chart.png" beforeDir="false" afterPath="$PROJECT_DIR$/GOOGL_3mo_stock_price_chart.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LOGGING/logging_download_plotting.log" beforeDir="false" afterPath="$PROJECT_DIR$/LOGGING/logging_download_plotting.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_download.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_download.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_plotting.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_plotting.py" afterDir="false" />
