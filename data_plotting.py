@@ -5,7 +5,7 @@ import numpy as np
 import datetime
 
 
-def create_and_save_plot(data, ticker, period, filename=None):
+def create_and_save_plot(data, ticker, period, style='classic', filename=None):
     """ Создаёт график, отображающий цены закрытия и скользящие средние. Предоставляет возможность сохранения графика
      в файл. Параметр filename опционален; если он не указан, имя файла генерируется автоматически."""
     # Улучшенное управление временными периодами. Форматирование строки "period" для отображения в названии файла
@@ -33,7 +33,7 @@ def create_and_save_plot(data, ticker, period, filename=None):
             data['Date'] = pd.to_datetime(data['Date'])
         plt.plot(data['Date'], data['Close'], label='Close Price')
         plt.plot(data['Date'], data['Moving_Average'], label='Moving Average')
-
+        plt.style.use(style)  # применяем выбранный стиль
     plt.title(f"{ticker} Цена акций с течением времени")
     plt.xlabel("Дата")
     plt.ylabel("Цена")

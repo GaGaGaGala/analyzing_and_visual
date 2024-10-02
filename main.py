@@ -18,7 +18,6 @@ def main():
     end = input("Введите дату окончания для анализа данных")
 
     # Fetch stock data
-    #data = stock.history(start=start, end=end)
     stock_data = dd.fetch_stock_data(ticker, period)
 
     # Add moving average to the dataG
