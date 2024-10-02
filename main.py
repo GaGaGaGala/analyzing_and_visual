@@ -14,8 +14,8 @@ def main():
 
     ticker = input("Введите тикер акции (например, «AAPL» для Apple Inc):»")
     period = input("Введите период для данных (например, '1mo' для одного месяца): ")
-    start = input("Введите дату начала анализа")
-    end = input("Введите дату окончания для анализа данных")
+    start = input("Введите дату начала анализа:")
+    end = input("Введите дату окончания для анализа данных:")
 
     # Fetch stock data
     stock_data = dd.fetch_stock_data(ticker, period)
@@ -24,7 +24,8 @@ def main():
     stock_data = dd.add_moving_average(stock_data)
 
     # Plot the data
-    dplt.create_and_save_plot(stock_data, ticker, period)
+    dplt.create_and_save_plot(stock_data, ticker, period, style=input)
+    #plt.style.use = input(style)  # выбраем стиль, например :plt.plot, plt.bar
 
     # Вычисляется среднее значение колонки 'Close'. Результат выводится в консоль.
     print('Средняя цена закрытия акций за заданный период: ', dd.calculate_and_display_average_price(stock_data))

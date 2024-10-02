@@ -5,7 +5,7 @@ import numpy as np
 import datetime
 
 
-def create_and_save_plot(data, ticker, period, style='classic', filename=None):
+def create_and_save_plot(data, ticker, period, style=input, filename=None):
     """ Создаёт график, отображающий цены закрытия и скользящие средние. Предоставляет возможность сохранения графика
      в файл. Параметр filename опционален; если он не указан, имя файла генерируется автоматически."""
     # Улучшенное управление временными периодами. Форматирование строки "period" для отображения в названии файла
@@ -24,6 +24,8 @@ def create_and_save_plot(data, ticker, period, style='classic', filename=None):
             dates = data.index.to_numpy()
             plt.plot(dates, data['Close'].values, label='Close Price')
             plt.plot(dates, data['Moving_Average'].values, label='Moving Average')
+            plt.bar(dates, data['Close'].values, label='Close Price')
+            plt.bar(dates, data['Moving_Average'].values, label='Moving Average')
         else:
             print("Информация о дате отсутствует или не имеет распознаваемого формата.")
             logging.info(f'Информация о дате отсутствует или не имеет распознаваемого формата.')
@@ -33,7 +35,10 @@ def create_and_save_plot(data, ticker, period, style='classic', filename=None):
             data['Date'] = pd.to_datetime(data['Date'])
         plt.plot(data['Date'], data['Close'], label='Close Price')
         plt.plot(data['Date'], data['Moving_Average'], label='Moving Average')
-        plt.style.use(style)  # применяем выбранный стиль
+        plt.bar(data['Date'], data['Close'], label='Close Price')
+        plt.bar(data['Date'], data['Moving_Average'], label='Moving Average')
+        '''Выбираем стиль графика'''
+    plt.style.use = input(style)  # выбраем стиль, например :plt.plot, plt.bar
     plt.title(f"{ticker} Цена акций с течением времени")
     plt.xlabel("Дата")
     plt.ylabel("Цена")
