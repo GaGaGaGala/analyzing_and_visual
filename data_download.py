@@ -123,6 +123,7 @@ def statistical_indicator(data, ticker_symbol):
 
 
 def interactive_chart(stock_data, ticker):
+    """Принимает DataFrame и вычисляет среднее значение колонки 'Close'. Результат  выводится в консоль."""
     # Создание графика с использованием Plotly
     fig = go.Figure()
 
