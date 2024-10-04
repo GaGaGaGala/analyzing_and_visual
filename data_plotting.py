@@ -53,6 +53,7 @@ def create_and_save_plot(data, ticker, period, style=input, filename=None):
 
 
 def plot_technical_indicators(data, ticker, indicator, filename=None):
+    """Отображает на графике дополнительные технические индикаторы  RSI и MACD."""
     plt.figure(figsize=(14, 7))
 
     if indicator == 'RSI':
