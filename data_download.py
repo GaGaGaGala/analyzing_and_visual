@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.INFO,
                     )
 
 
-def fetch_stock_data(ticker, period='1mo'):
+def fetch_stock_data(ticker, period):
     """ Получает исторические данные об акциях для указанного тикера и временного периода.
      Возвращает DataFrame с данными."""
     stock = yf.Ticker(ticker)
@@ -64,8 +64,9 @@ def export_data_to_csv(data, filename):
     df.to_csv('dataframe.csv', index=False)
     logging.info(f'Объект {type(data)} экспортирован в файл')
 
+
 def calculate_rsi_from_yfinance(ticker, period, window=14):
-    data = None
+    """Добавляет и рассчитывает дополнительный технический индикатор RSI."""
     if len(period) > 3:
         list_with_space = period.split(',')
         start, end = [elem.strip() for elem in list_with_space]
@@ -74,7 +75,7 @@ def calculate_rsi_from_yfinance(ticker, period, window=14):
     else:
         data = yf.Ticker(ticker).history(period=period)
         logging.info(f'Временной период с предопределённым интервалом (RSI) {type(data)}')
-    # Расчёт RSI
+    # Рассчёт RSI
     delta = data['Close'].diff()
     height = (delta.where(delta > 0, 0)).rolling(window=window).mean()
     decline = (-delta.where(delta < 0, 0)).rolling(window=window).mean()
@@ -85,9 +86,9 @@ def calculate_rsi_from_yfinance(ticker, period, window=14):
     return data
 
 
-# Рсчёт технического индикатора MACD
+# Рассчёт технического индикатора MACD
 def calculate_macd_from_yfinance(ticker, period, short_window=12, long_window=26, signal_window=9):
-    data = None
+    """Добавляет и рассчитывает дополнительный технический индикатор MACD"""
     if len(period) > 3:
         list_with_space = period.split(',')
         start, end = [elem.strip() for elem in list_with_space]
@@ -107,3 +108,13 @@ def calculate_macd_from_yfinance(ticker, period, short_window=12, long_window=26
     data['Signal Line'] = signal_line
     logging.info(f'Колонка "MACD" и "Signal Line": {type(data)} {type(data)}')
     return data
+
+
+def statistical_indicator(data, ticker_symbol):
+    """Рассчитывает статистический индикатор стандартного отклонения цены закрытия."""
+    std_dev = data['Close'].std()
+
+    # Выводим стандартное отклонение
+    print(f"Стандартное отклонение цены закрытия {ticker_symbol}: {std_dev}")
+    logging.info(f'Стандартное отклонение цены закрытия {ticker_symbol}: {std_dev}')
+    return std_dev

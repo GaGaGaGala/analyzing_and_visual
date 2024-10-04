@@ -45,13 +45,14 @@ def create_and_save_plot(data, ticker, period, style=input, filename=None):
     plt.legend()
 
     if filename is None:
-        filename = f"{ticker}_{period}_stock_price_chart.png"
+        filename = f"CHARTS/{ticker}_{period}_stock_price_chart.png"
 
     plt.savefig(filename)
     print(f"График сохранен как {filename}")
     logging.info(f'График сохранен как {filename}')
 
-def plot_technical_indicators(data, ticker, indicator, filename= None):
+
+def plot_technical_indicators(data, ticker, indicator, filename=None):
     plt.figure(figsize=(14, 7))
 
     if indicator == 'RSI':
@@ -65,7 +66,7 @@ def plot_technical_indicators(data, ticker, indicator, filename= None):
     plt.legend()
 
     if filename is None:
-        filename = f"{ticker}_{indicator}_stock_price_chart.png"
+        filename = f"CHARTS/{ticker}_{indicator}_stock_price_chart.png"
 
     plt.savefig(filename)
     print(f"{indicator} график сохранён, как {filename}")
